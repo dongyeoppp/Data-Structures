@@ -109,7 +109,6 @@ void mirrorTree(BTNode *node)       // 이진트리 좌우 위치 바꾸기
     BTNode *removed;
     BTNode *save;
     push(&ss,node);
-    int count = 0;
     while(1){
         if(ss.top==NULL){
             break;

@@ -89,18 +89,18 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void preOrderIterative(BSTNode *root)
+void preOrderIterative(BSTNode *root)		// 이진트리의 전위 순회 (이진트리 중위순회와 동일한 방식)
 {
-	Stack ss = {NULL};
-	BSTNode *node = root;
-	while(node != NULL || !isEmpty(&ss)){
+	Stack ss = {NULL};		// 새로운 스택 생성 		
+	BSTNode *node = root;		
+	while(node != NULL || !isEmpty(&ss)){		// node가 비어있지 않거나 스택이 비어있지 않을 경우 
 		while(node!=NULL){
-			printf("%d ",node->item);
-			push(&ss,node);
-			node = node->left;
+			printf("%d ",node->item);		// node를 stack에 push하기 전에 print
+			push(&ss,node);		
+			node = node->left;		// 왼쪽 노드를 계속 넣음(null이 나올때 까지)
 		}
-		node = pop(&ss);
-		node = node->right;
+		node = pop(&ss);		 
+		node = node->right;		// node->right가 있다면 node !=null
 	}
 
 }

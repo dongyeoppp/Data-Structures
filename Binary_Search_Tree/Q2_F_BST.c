@@ -88,7 +88,7 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void inOrderTraversal(BSTNode *root)
+void inOrderTraversal(BSTNode *root)		
 {
 	// Stack ss = {NULL};
 	// BSTNode *removed ;
@@ -120,18 +120,20 @@ void inOrderTraversal(BSTNode *root)
 	// 	}
 	// }
 	// 예외 케이스가 있어 다시 구현했다.  
-	Stack ss = {NULL};
+
+	// 이진트리 중위순회(스택사용)
+	
+	Stack ss = {NULL};		// 새로운 stack ss 생성  
 	BSTNode *node = root;
-	while (node != NULL || !isEmpty(&ss)){
-		while(node!=NULL){
+	while (node != NULL || !isEmpty(&ss)){		// 해당 node가 null이 아니거나 stack이 비어있지 않을때 
+		while(node!=NULL){		// 해당 노드가 null에 도달할때까지 왼쪽 노드를 ss stack에 push
 			push(&ss,node);
 			node = node->left;
 		}
-		node = pop(&ss);
-		printf("%d ",node->item);
-		node = node->right;
+		node = pop(&ss);	
+		printf("%d ",node->item);		// pop할때 마다 해당 노드 item값 출력
+		node = node->right;		// right 값이 있을 경우 node != null
 	}
-
 }
 
 

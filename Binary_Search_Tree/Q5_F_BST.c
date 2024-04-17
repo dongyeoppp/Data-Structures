@@ -89,23 +89,23 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void postOrderIterativeS2(BSTNode *root)
+void postOrderIterativeS2(BSTNode *root) // 이진 트리 후위 순회 (two stacks)
 {
 	Stack ss1 = {NULL};
 	Stack ss2 = {NULL};
 	BSTNode *removed;
 	push(&ss1,root);
-	while(!isEmpty(&ss1)){
-		removed = pop(&ss1);
+	while(!isEmpty(&ss1)){		// ss1 stack이 빌때까지  
+		removed = pop(&ss1);		// ss1에서 pop한 값을 ss2에 push
 		push(&ss2,removed);
-		if(removed->left != NULL){
+		if(removed->left != NULL){			// left노드부터 ss1에 push
 			push(&ss1,removed->left);
 		}
-		if(removed->right != NULL){
+		if(removed->right != NULL){			// right 노드 ss1에 push
 			push(&ss1,removed->right);
 		}
 	}
-	while(!isEmpty(&ss2)){
+	while(!isEmpty(&ss2)){		// ss2에 담긴 값을 순서대로 pop하여 printf
 		removed = pop(&ss2);
 		printf("%d ",removed->item);
 	}

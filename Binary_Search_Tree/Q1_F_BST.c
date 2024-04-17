@@ -91,23 +91,23 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void levelOrderTraversal(BSTNode* root)
+void levelOrderTraversal(BSTNode* root)		// 이진 트리 레벨 순회  
 {
-	Queue que = {NULL};
-	enqueue(&(que.head),&(que.tail),root);
+	Queue que = {NULL,NULL};		// 비어있는 queue 생성  
+	enqueue(&(que.head),&(que.tail),root);		// root enqueue
 	BSTNode *removed ;
 
 	while(1){
-		if(que.head==NULL){
+		if(que.head==NULL){		// queue가 빌때까지
 			break;
 		}
-		removed = dequeue(&(que.head),&(que.tail)); 
+		removed = dequeue(&(que.head),&(que.tail)); 		// queue에서 pop한 값 removed에 저장 후 removed->item 값 출력    
 		printf("%d ",removed->item);
 		if(removed->left != NULL){
-			enqueue(&(que.head),&(que.tail),removed->left);
+			enqueue(&(que.head),&(que.tail),removed->left);		// removed노드의 left 노드가 존재하면 queue에 enqueue
 		}
 		if(removed->right != NULL){
-			enqueue(&(que.head),&(que.tail),removed->right);
+			enqueue(&(que.head),&(que.tail),removed->right);		// removed노드의 right 노드가 존재하면 queue에 enqueue
 		}
 	}
 }

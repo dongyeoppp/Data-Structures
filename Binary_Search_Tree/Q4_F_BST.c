@@ -89,31 +89,30 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void postOrderIterativeS1(BSTNode *root)
+void postOrderIterativeS1(BSTNode *root)		// 이진트리 후위 순회   
 {
 	Stack ss = {NULL};
 	BSTNode *removed;
 	BSTNode *p;
 	push(&ss,root);
 	while(!isEmpty(&ss)){
-		removed = pop(&ss);
-		p = peek(&ss);
-		if(p != NULL && removed->item == p->item){
-			printf("%d ",removed->item);
+		removed = pop(&ss);		// removed -> 스택에서 pop한 값 저장
+		p = peek(&ss);		// pop이후 stack 맨위에 저장 된 값 p에 저장
+		if(p != NULL && removed->item == p->item){		// p가 null이 아니고 removed 와 p의 값이 같을 경우 (자녀노드가 있는 노드이지만 스택에서 한번 나왔다 들어간 노드) 
+			printf("%d ",removed->item);		// 자녀노드가 있는 노드 print, 값이 두개 들어가므로 한번더 pop
 			pop(&ss);
-			continue;
 		}
-		if ((removed->right !=NULL || removed->left !=NULL)){
+		if ((removed->right !=NULL || removed->left !=NULL)){		// 자녀노드가 한개라도 있을 경우, 오른쪽 노드부터 스택에 push
+			push(&ss,removed);		// push 두번 해서 나갔다 다시 들어온 값을 체크  
 			push(&ss,removed);
-			push(&ss,removed);
-			if(removed->right !=NULL){
+			if(removed->right !=NULL){		// right값이 존재하면 right값 push
 				push(&ss,removed->right);
 			}
-			if(removed->left !=NULL){
+			if(removed->left !=NULL){		// left값이 존재하면 left값 push
 				push(&ss,removed->left);	
 			}
 		}
-		else{
+		else{		// removed => 바닥노드일 경우 출력 
 			printf("%d ",removed->item);
 		}
 	}

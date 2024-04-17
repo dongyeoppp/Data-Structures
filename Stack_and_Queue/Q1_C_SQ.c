@@ -116,6 +116,7 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)		// 연결리스트 큐로 구현하기  
 {
+	removeAllItemsFromQueue(q);
 	ListNode *node = ll->head;		// node는 ll의 첫번째 노드를 가르킨다.  
 	if (isEmptyQueue(q)){			// q에 값이 쌓이지 않도록 q가 비어있을 경우에만 q에 값을 넣어준다.  
 		for(int i =0; i<ll->size;i++){		
