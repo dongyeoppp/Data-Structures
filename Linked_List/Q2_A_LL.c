@@ -101,9 +101,24 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
+void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)			// 두개의 연결리스트 합치기 , 첫번째 연결리스트 노드 사이 사이에 두번째 연결리스트의 노드가 차례대로 들어간다.    
 {
-    /* add your code here */
+	ListNode *node1 = ll1 -> head;		// node1에는 ll1 연결리스트의 head(첫번째 노드의 주소값)가 들어간다.
+	ListNode *node2 = ll2 -> head;		// 
+	int count1 = 1;		// 두번째 연결리스트의 노드가 들어갈 첫번째 연결리스트의 인덱스 자리    
+	while(1){
+		if(count1 > ll1->size){		// ll1이 112보다 더 길 경우 ll1의 노드 개수만큼만 병합진행   
+			break;
+		}
+		if (node2 == NULL){			// ll1의 길이가 ll2보다 짧을 경우 ll2에서 더 이상 병합할 노드가 남아있지 않다면 멈춤
+			break;
+		}
+		insertNode(ll1,count1,node2->item);			// ll1의 count1인덱스 자리에 node2->item 값을 넣음   
+		removeNode(ll2,0);							// ll2에서는 해당 node를 삭제   
+		node2 = ll2 -> head;		// ll2의 head에 있는 값이 삭제된 이후 그 다음 노드가 head자리에 오게됨으로 해당 노드의 주소를 가르키도록 함    
+		count1+=2;		// 인덱스 값 갱신   
+		
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

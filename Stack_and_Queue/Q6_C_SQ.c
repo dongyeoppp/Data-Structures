@@ -109,9 +109,19 @@ int main()
 
 ////////////////////////////////////////////////////////////
 
-void removeUntil(Stack *s, int value)
+void removeUntil(Stack *s, int value)		//value값이후의 stack만 출력  
 {
-/* add your code here */
+	while(1){
+		if(isEmptyStack(s)){		
+			break;
+		}
+		if(peek(s)== value){		// peek -> stack의 top에 있는 값을 빼지 않고 확인할 수 있다.  
+			break;
+		}
+		else{			// value값이 나오기 전까지는 계속 pop하고 value값이 나오면 break
+			pop(s);
+		}
+	}	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

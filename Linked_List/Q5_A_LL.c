@@ -13,7 +13,7 @@ Purpose: Implementing the required functions for Question 5 */
 
 typedef struct _listnode{
 	int item;
-	struct _listnode *next;
+	struct _listnode *next;  
 } ListNode;			// You should not change the definition of ListNode
 
 typedef struct _linkedlist{
@@ -100,9 +100,18 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
+void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)		// 연결리스트 나누기  
 {
-	/* add your code here */
+	ListNode *node = ll->head;		// *node는 ll리스트에 head를 주소로 같는 노드의 데이터를 가르킨다. 
+	int count = (ll->size+1) / 2 ;		// 리스트를 반으로 나눈 길이 (ll길이가 홀수일 경우 frontlist에 노드 한개가 더 들어간다.)
+	for(int i=0;i<count;i++){			// front리스트에 value값 넣기  
+		insertNode(resultFrontList,i,node->item);		
+		node = node->next;		// 다음노드를 가르키도록함 
+	}
+	for(int j=0; j<ll->size-count;j++){		// front에 반을 넣고 남은 나머지 만큼 back리스트에 넣는다.    
+		insertNode(resultBackList,j,node->item);
+		node = node->next;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

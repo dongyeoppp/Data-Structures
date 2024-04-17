@@ -84,9 +84,22 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void moveEvenItemsToBack(LinkedList *ll)
+void moveEvenItemsToBack(LinkedList *ll)	// 노드의 value값이 짝수일 경우 연결리스트의 뒤쪽에으로 옮기기 (홀수일 경우와 동일하다.)
 {
-	/* add your code here */
+	ListNode *node = ll->head;
+	int count = ll->size;
+	for(int i =0; i<count; i++){
+		if(node->item %2==0){
+			insertNode(ll,ll->size,node->item);
+			node = node->next;
+			removeNode(ll,i);
+			count--;
+			i--;
+		}
+		else{
+			node=node->next;   
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

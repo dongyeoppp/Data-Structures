@@ -100,9 +100,28 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int smallestValue(BTNode *node)
+int smallestValue(BTNode *node)         // 이진트리에서 가장 작은 값 찾기   
 {
-	/* add your code here */
+	Stack ss ={NULL};
+    BTNode *removed;
+    int mini = node->item;      // mini에 가장 작은 값 담기  
+    push(&ss,node);
+    while(1){
+        if(ss.top==NULL){
+            break;
+        }
+        removed = pop(&ss);
+        if(removed->item < mini){
+            mini = removed->item;       // pop한 노드의 값이 mini에 담겨 있던 값보다 작을 경우 mini 값 갱신   
+        }
+        if(removed->left != NULL){
+            push(&ss,removed->left);
+        }
+        if(removed->right != NULL){
+            push(&ss,removed->right);
+        }
+    }
+    return mini;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

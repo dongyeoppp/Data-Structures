@@ -85,9 +85,46 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-void RecursiveReverse(ListNode **ptrHead)
+// void RecursiveReverse(ListNode **ptrHead)		// 연결리스트 뒤집기  (재귀 사용 x)
+// {
+// 	ListNode *node = *ptrHead;		// node에는 head의 주소를 넣음  
+// 	ListNode *pre_node = node;		// 해당노드의 이전 노드를 담자  
+// 	ListNode *last_node = node;		// 마지막 노드를 저장할거임   
+// 	ListNode *first_node = node;	// 처음에 head가 가리키는 주소 저장    
+// 	int count = 0;		// 마지막 노드 저장하기 위한 변수    
+// 	while(1){
+// 		if(node->next==NULL){		// 마지막 노드일 경우(next가 가르키는 주소가 없을경우 = null)
+// 			if(count == 0){			// ll리스트의 마지막 노드를 last_node에 저장  
+// 				last_node = node;
+// 			}
+// 			node->next = pre_node;		// 해당 노드의 next에 이전노드의 주소를 저장  
+// 			pre_node->next = NULL;		// 이전 노드에 next 값에는 NULL저장  
+// 			if (pre_node == first_node){		// 이전 노드가 처음 노드가 되었을 경우 
+// 				break;
+// 			}
+// 			node = *ptrHead;		// 다시 처음 head가가르키는 node로 이동  
+// 			pre_node= node;			// pre_node도 초기화   
+// 			count++;				// 마지막 노드를 저장했다면 count는 필요없다.  
+// 		}
+// 		pre_node = node;		// node->next 값이 null이 아닐경우 pre_node에 해당 노드 저장   
+// 		node = node->next;		// 다음노드를 가르키는 주소를 node에 저장   
+// 	}
+// 	*ptrHead = last_node;		// while문에 나온이후 head가 가르키는 주소를 마지막 노드로 바꿉니다. 그럼 마지막 노드부터 출력이 됩니다.   
+// }
+
+void RecursiveReverse(ListNode **ptrHead)		// 연결리스트 뒤집기  (재귀로 구현)
 {
-	/* add your code here */
+	ListNode *pre = *ptrHead;		// pre노드에는 prehead의 주소(ll의head주소를 담고있는)가 들어간다.
+	ListNode *node = pre->next;		// head의 다음 노드의 주소를 node에 넣음  
+
+	if(node == NULL){		// 재귀 종료 조건 -> node가 null일경우, pre는 그러면 마지막 노드의 주소를 가르키고 있다.
+		return;
+	}
+	RecursiveReverse(&node);	// node의 주소를 매개변수로 하여 재귀 ->node의 주소값을 넘겼기때문에 node의 값이 계속 갱신될 수 있다.  
+	pre->next->next = pre;		// 재귀가 끝났을 때 node의 next값을 pre의 주소로 바꾸어준다.
+	pre->next = NULL;			// pre의 next값은 node의 주소가 들어있던걸 null로 바꿔준다.   
+
+	*ptrHead = node;		// ll의 head가 가르키는 노드를 원래 ll리스트의 마지막노드로 바꿔주기위함, node값은 마지막 노드의 주소값으로 계속 갱신된다.   
 }
 
 //////////////////////////////////////////////////////////////////////////////////

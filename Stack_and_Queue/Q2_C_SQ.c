@@ -111,14 +111,45 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void createStackFromLinkedList(LinkedList *ll, Stack *s)
+void createStackFromLinkedList(LinkedList *ll, Stack *s)		// stack에 연결리스트 데이터 값 넣기     
 {
-    /* add your code here */
+	ListNode *node = ll->head;		// node가 ll head의 주소를 가지도록 하였다.
+
+	if(isEmptyStack(s)){		// 스택이 비어있을 경우에만 스택에 push   
+		while(1){
+		if (node == NULL){		// node가 비어있을경우 break
+			break;
+		}
+		push(s,node->item);		
+		node = node->next;
+		}
+	}
 }
 
-void removeEvenValues(Stack *s)
+void removeEvenValues(Stack *s)			// stack에서 짝수 값 제거하기  
 {
-	/* add your code here */
+	LinkedList ll = { 0, NULL };		// 새로운 LinkedList 생성(size값은 0, head가 가르키는 node는 null )
+	Stack temp = { ll };				// 새로운 스택 temp(방금만든 ll을 가지고 있도록 한다.)  
+	Stack *ss = &temp;					// ss는 temp의 주소를 가지고 있고 *ss는 temp안에 ll리스트를 가르키고 있다.  
+	int removed=0;   // stack에서 pop한 값을 담자   
+
+	while(1){
+		if(isEmptyStack(s)){		// s stack이 비어있다면 break
+			break;
+		}
+		removed = pop(s);		
+		if(removed%2==1){
+			push(ss,removed);		// 스택에 있던 홀수 값만 새로 만든 스택 ss에 push
+		}
+	}
+	while(1){
+		if(isEmptyStack(ss)){		// ss stack이 비어있을 때 까지 
+			break;
+		}
+		removed = pop(ss);		
+		push(s,removed);		// s 스택에 다시 push 
+	}
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -102,9 +102,40 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////
-int balanced(char *expression)
+int balanced(char *expression)		// 괄호 짝 맞추기  
 {
-/* add your code here */
+	
+	LinkedList ll = {0,NULL};		
+	Stack temp = { ll };
+	Stack *ss = &temp;		// 새로운 스택 생성 (*ss는 temp stack 안에 ll리스트를 가르킨다. )
+	for(int i =0;i<strlen(expression);i++){		// expression 문자열 길이 만큼   
+		if(expression[i]=='(' || expression[i]=='[' || expression[i]=='{'){		// 열린 괄호만 stack에 push  
+			push(ss,expression[i]);
+		}
+		else{
+			if (isEmptyStack(ss)){		// for문이 아직 끝나지 않았는데 ss스택이 비어있지 않다면 not balanced!
+				return 1;
+			}
+			else if(peek(ss) =='(' && expression[i]==')'){		// 괄호의 순서쌍이 맞았을 경우 열린괄호도 stack에서 빼기  
+				pop(ss);
+			}
+			else if(peek(ss) =='[' && expression[i]==']'){		
+				pop(ss);
+			}
+			else if(peek(ss) =='{' && expression[i]=='}'){
+				pop(ss);
+			}
+			else {
+				return 1;	// 괄호의 순서쌍이 맞지 않을 경우 not balanced! 	
+			}
+		}
+	}
+	if(isEmptyStack(ss)){	// for문 이후 ss가 비어있을 경우 balanced!
+		return 0;	
+	}
+	else{			// for문 이후 ss가 비어있지 않을 경우 not balanced!
+		return 1;
+	}
 }
 
 ////////////////////////////////////////////////////////////

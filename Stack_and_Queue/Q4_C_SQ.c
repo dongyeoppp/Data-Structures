@@ -110,9 +110,23 @@ int main()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void reverse(Queue *q)
+void reverse(Queue *q)		// 큐 뒤집기 (스택 사용) 		
 {
-/* add your code here */
+	LinkedList ll = {0,NULL};	// ll이라는 새로운 연결리스트 만들기 (size -> 0, node -> null)
+	Stack temp = { ll };		// temp라는 stack 만들기 (위에 만든 ll과 연결됨)   
+	Stack *ss = &temp;			// ss는 temp의 주소값을 가지고 *ss는 ll리스트를 가르킨다.   
+	while(1){
+		if(isEmptyQueue(q)){		// 먼저 que가 빌때까지 빼서 ss 스택에 dequeue한 값을 넣어준다.  
+			break;
+		}
+		push(ss,dequeue(q));		
+	}
+	while(1){
+		if(isEmptyStack(ss)){		// ss스택에 들어간 값을 pop하여 다시 q에 넣어준다.  (queue는 선입 선출방식이고 stack은 선입후출이어서 순서가 뒤집힌다.)
+			break;
+		}
+		enqueue(q,pop(ss));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

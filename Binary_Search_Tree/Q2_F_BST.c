@@ -90,8 +90,51 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	// Stack ss = {NULL};
+	// BSTNode *removed ;
+	// BSTNode *node; 
+	// int temp =0;
+	// push(&ss,root);
+	// while(!isEmpty(&ss)){
+	// 	removed=peek(&ss);
+	// 	if(removed ->left != NULL && removed->left != node && removed->item != root->item){
+	// 		push(&ss,removed->left);
+	// 	}
+	// 	else if(temp ==0){
+	// 		push(&ss,removed->left);
+	// 		temp++;
+	// 	}
+	
+		
+	// 	else {
+	// 		if (removed->right ==NULL){
+	// 			node = pop(&ss);
+	// 			printf("%d ",node->item);
+				
+	// 		}
+	// 		else{
+	// 			node = pop(&ss);
+	// 			printf("%d ",node->item);
+	// 			push(&ss,node->right);
+	// 		}
+	// 	}
+	// }
+	// 예외 케이스가 있어 다시 구현했다.  
+	Stack ss = {NULL};
+	BSTNode *node = root;
+	while (node != NULL || !isEmpty(&ss)){
+		while(node!=NULL){
+			push(&ss,node);
+			node = node->left;
+		}
+		node = pop(&ss);
+		printf("%d ",node->item);
+		node = node->right;
+	}
+
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 

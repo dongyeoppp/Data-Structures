@@ -100,10 +100,29 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int sumOfOddNodes(BTNode *node)
+int sumOfOddNodes(BTNode *node)     // 이진트리의 홀수 값 모두 더하기
 
 {
-    /* add your code here */
+    Stack ss = {NULL};      // 새로운 stack 생성  
+    BTNode *removed;        
+    push(&ss,node);
+    int count = 0;
+    while(1){
+        if(ss.top==NULL){        // 스택에 값이 없을때까지 
+            break;
+        }
+        removed = pop(&ss);
+        if (removed->item % 2 == 1){        // pop한 값이 홀수일 경우 count에 해당 노드 item 값 더하기
+            count += removed->item;
+        }
+        if (removed->left != NULL){
+            push(&ss,removed->left);
+        }
+        if (removed->right != NULL){
+            push(&ss,removed->right);
+        }
+    }
+    return count;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

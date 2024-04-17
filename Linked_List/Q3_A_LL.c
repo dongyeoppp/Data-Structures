@@ -84,9 +84,22 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void moveOddItemsToBack(LinkedList *ll)
+void moveOddItemsToBack(LinkedList *ll)			// 노드의 value값이 홀수일 경우 연결리스트의 뒤쪽에으로 옮기기   
 {
-	/* add your code here */
+	ListNode *node = ll->head;		// node는 ll연결리스트의 head를 가지고 있다. 
+	int count = ll->size;			// count는 연결리스트의 길이  
+	for(int i =0; i<count; i++){
+		if(node->item %2==1){		// node의 item 값이 홀수일 경우   
+			insertNode(ll,ll->size,node->item);		// 연결리스트의 가장 뒤쪽에 해당 node의 item값 넣기   
+			node = node->next;		// node가 다음 노드를 가르킬 수 있도록한다.   
+			removeNode(ll,i);		// 홀수 item값을 뒤로 넘긴 후 해당 노드는 삭제한다.  
+			count--;			  // 뒤쪽으로 보낸 값은 다시 보지 않기 위해, 무한루프 방지하기 위해 count값을 줄여준다.   
+			i--;		// 중간에 노드를 건너뛰지 못하고 차례대로 다 보기 위함. item이 짝수인 요소의 갯수만큼 인덱스가 증가한다. 
+		}
+		else{
+			node=node->next;   // node의 item 값이 짝수일 경우 다음 노드를 가르키도록한다.   
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

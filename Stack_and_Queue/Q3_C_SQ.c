@@ -101,9 +101,29 @@ int main()
 
 /////////////////////////////////////////////////////////////////////////////////
 
-int isStackPairwiseConsecutive(Stack *s)
+int isStackPairwiseConsecutive(Stack *s)		// 순서쌍 여부 확인하기  
 {
-  /* add your code here */
+  if(s->ll.size%2==1){		// 스택의 길이가 홀수일 경우 return 0  
+		return 0;
+	}
+  int removed1,removed2;	
+  int count =1;
+
+  while(1){
+	if (isEmptyStack(s)){	// stack 값이 다 비어졌다면 return 1 
+		return count;
+	}
+	removed1 = pop(s);		// stack에서 연속된 두값을 뺀 후 비교하여 순서쌍인지 확인한다.  
+	removed2 = pop(s);
+	if(removed1-removed2==1 || removed2-removed1 == 1){
+		continue;		// count 값 1 유지
+	}
+	else{
+		count=0;		// 순서쌍이 아니라면 count 값 0으로 바꾼 후 return   
+		return count;
+	}
+
+  }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

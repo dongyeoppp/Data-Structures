@@ -113,10 +113,33 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
+int identical(BTNode *tree1, BTNode *tree2)     // 두개의 트리가 같은지 비교하기  
 
 {
-   /* add your code here */
+    if (tree1 == NULL && tree2 == NULL){        // 두 개의 리스트 같을 경우  (둘다 null에 도착)
+        return 1; 
+    }
+    if (tree1 == NULL){             // 두 개의 리스트가 다를 경우 (tree1에 노드만 null에 도착한 경우)
+        if(tree2 !=NULL){
+            return 0;
+        }
+    }
+    if (tree2 == NULL){         // 두 개의 리스트가 다를 경우 (tree2에 노드만 null에 도착한 경우)
+        if(tree1 !=NULL){
+            return 0;
+        }
+    }
+    if (tree1->item != tree2->item){        // 노드 안에 들어있는 값이 다를 경우  
+        return 0;
+    }
+    int a = identical(tree1->left,tree2->left);     // 왼쪽으로 재귀 
+    int b = identical(tree1->right,tree2->right);       // 오른쪽으로 재귀   
+    if(a==1 && b==1){       // a,b모두 1이 return 된 경우 -> 두 리스트는 같다.  
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////

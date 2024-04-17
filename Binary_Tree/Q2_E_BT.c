@@ -94,10 +94,60 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int maxHeight(BTNode *node)
+int maxHeight(BTNode *node)     // 이진트리 깊이 구하기
 
-{
-    /* add your code here */
+{ 
+    int count = 0;      // 이진트리의 depth 값을 담음   
+    int max = 0;        // depth값 저장   
+    BTNode *removed;        // stack에서 pop을 한 값을 저장  
+    BTNode *node1 = node;       // 루트 노드를 저장   
+    Stack ss = { NULL };        // 비어있는 스택 생성 
+    push(&ss,node);             // 루트 노드 먼저 스택에 넣어주기  
+    while(1){
+        if (ss.top==NULL){       // 스택이 비어있을 경우 break
+            break;
+        }
+        removed = pop(&ss);        
+        if (removed == node1->left || removed == node1->right){     // 스택에서 루트노드와 연결된 노드가 나왔을 경우 원래 count값 max에 저장 이후 , count 값 1로 재설정 (오른쪽 노드들 다 돌고 왼쪽노드로 간다.)
+            max =count;
+            count = 1;
+        }
+        if (removed->left != NULL){     // 왼쪽 노드가 null이 아닐 경우 push
+            push(&ss,removed->left);        
+        }
+        if(removed ->right != NULL){        // 오른쪽 노드가 null이 아닐 경우 push
+            push(&ss,removed->right);
+        }
+        if (removed->right == NULL &&  removed->left == NULL)       // leaf node 일 경우 push 하지 않기 (count도 하지 않아야 함)
+        {
+            continue;
+        }   
+        count++;        // count +1 
+    }
+    if(max>=count){     // 오른쪽 노드, 왼쪽 노드의 depth를 비교하여 큰 값을 return    
+        return max;
+        }
+    else{
+        return count;
+    }   
+
+
+    //  /////////////////////// (재귀로 구현)
+   
+    // if (node == NULL){      // node가 존재하지 않을 경우 -1 return 
+    //     return -1;
+    // }
+    // if (node->left == NULL && node->right == NULL){     // 자녀 노드가 없는 노드일 경우 return 0
+    //     return 0;
+    // }
+    // int a = maxHeight(node->left);      // 왼쪽 재귀 -> 왼쪽 자식노드를 루트로 하여 깊이 계산 
+    // int b = maxHeight(node->right);     // 오른쪽 재귀  -> 오른쪽 자식 노드를 루트로 하여 깊이 계산  
+    // if (a>b){
+    //     return a+1;     // 왼쪽 트리가 더 높은 경우 높이에 +1을 더해 return 
+    // }
+    // else{
+    //     return b+1;     // 오른쪽 트리가 더 높은 경우 높이에 +1을 더해 return
+    // }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

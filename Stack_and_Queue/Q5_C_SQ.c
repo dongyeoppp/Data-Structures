@@ -107,9 +107,15 @@ int main()
 
 ////////////////////////////////////////////////////////////
 
-void recursiveReverse(Queue *q)
+void recursiveReverse(Queue *q)		// 재귀를 사용하여 큐 요소 뒤집기  
 {
-/* add your code here */
+	int temp;
+	if(isEmptyQueue(q)){		// 재귀 종료 조건, q가 빌때 까지   
+		return;
+	}
+	temp = dequeue(q);		// dequeue한 값이 temp에 저장됨 
+	recursiveReverse(q);		// 재귀
+	enqueue(q,temp);		// 마지막에 temp에 저장된 값부터 순서대로 q에 다시 enqueue
 }
 
 //////////////////////////////////////////////////////////////////

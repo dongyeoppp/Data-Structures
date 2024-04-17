@@ -86,9 +86,26 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-int moveMaxToFront(ListNode **ptrHead)
+int moveMaxToFront(ListNode **ptrHead)		// 연결리스트에서 가장 큰 값을 가지고 있는 노드를 연결리스트에 맨앞으로 보내기   
 {
-    /* add your code here */
+	ListNode *node= *ptrHead;		// node는 head를 담고 있고, *node는 head를 주소로 가지는 노드를 가르킨다.
+	int maxi = node->item;
+	ListNode *pre_maxi= node;		// 최대값을 담고 있는 노드의 이전 노드를 담을거다//
+	ListNode *maxi_node = node;		// 최대값을 가지고 있는 노드를 담자//
+	ListNode *pre_node = node;		// 연결리스트의 모든 노드를 살펴보며 이전 노드를 계속담자//
+	node = node-> next;
+	while(node!=NULL){
+		if(maxi< node->item){		// 노드의 value값(item)이 최댓값일 경우//
+			maxi= node->item;
+			maxi_node = node;
+			pre_maxi = pre_node;	// 이전노드와 최대값 노드 갱신 //
+		}
+		pre_node = node;		// 이전노드를 계속 저장 
+		node = node -> next;		// 가르키는 포인터를 다음노드로 변경//
+	}
+	pre_maxi->next = maxi_node -> next;		// 최대값 이전 노드의 next값에 최대값을 가지고 있는 노드의 next주소를 넣음
+	maxi_node->next = *ptrHead;		// 최대값을 가지는 노드의 next값에 head를 넣음  (head가 가르키는  노드의 주소 = head)
+	*ptrHead = maxi_node;		// head를 주소로 가지고 있는 노드를 최댓값이 들어있는 노드로 바꿈   
 }
 
 //////////////////////////////////////////////////////////////////////////////////

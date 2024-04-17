@@ -103,9 +103,26 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void printSmallerValues(BTNode *node, int m)
-{
-	/* add your code here */
+void printSmallerValues(BTNode *node, int m)        // m 보다 작은 값 전부 출력하기  
+    {
+    Stack ss ={NULL};
+    BTNode *removed;
+    push(&ss,node);
+    while(1){
+        if(ss.top==NULL){
+            break;
+        }
+        removed = pop(&ss);
+        if(removed->item< m){
+            printf("%d ",removed->item);        // pop 한 노드의 값이 m보다 작을경우 printf로 출력   
+        }
+        if (removed->right != NULL){
+            push(&ss,removed->right);
+        }
+        if (removed->left != NULL){
+            push(&ss,removed->left);
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

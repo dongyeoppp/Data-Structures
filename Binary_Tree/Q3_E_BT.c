@@ -98,10 +98,30 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int countOneChildNodes(BTNode *node)
+int countOneChildNodes(BTNode *node)        // 자녀노드를 한개 가지고 있는 노드 찾기  
 
 {
-    /* add your code here */
+    Stack ss = {NULL};      // 새로운 스택 생성   
+    push(&ss,node);     //  루트 노드 스택에 push
+    int count = 0;      // 자녀 노드를 하나만 가지고 있는 노드의 개수 담기  
+    BTNode *removed ;
+    while(1){
+        if(ss.top==NULL){
+            break;
+        }
+        removed = pop(&ss);
+        if((removed->left != NULL && removed->right == NULL)||(removed->left == NULL && removed->right != NULL)){       // 노드를 하나만 가지고 있을 경우 
+            count++;
+        }
+        if(removed->left != NULL){      // removed->left 값이  null이 아닐 경우 push
+            push(&ss,removed->left);
+        }
+        if (removed->right != NULL){        // removed->right 값이 null이 아닐 경우 push
+            push(&ss,removed->right);
+        }
+    }
+    return count;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -88,9 +88,28 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int insertSortedLL(LinkedList *ll, int item)
+int insertSortedLL(LinkedList *ll, int item)			// 연결리스트 요소 오름차순 정렬 하기 
 {
-	/* add your code here */
+	ListNode *node= ll->head;		// node안에 head값을 넣고, *node값은 head주소 안에 요소를 가르킨다.    
+
+	for(int i = 0 ; i < ll-> size; i++){		// ll->size는 ll 연결리스트의 길이   
+		if (node == NULL){			// 연결리스트에 아무것도 없을 경우 해당 인덱스에 아이템 값을 추가  
+			insertNode(ll,i,item);
+			return i;		// 해당 인덱스를 반환  
+		}
+		else if(node->item == item){		// 연결리스트에 존재하는 중복된 값을 입력할 경우 -1을 반환  
+			return-1;
+		}
+		else if(node->item > item){			// 지금 넣은 item 값보다 노드에 있는 item값이 크면 그 자리에 해당 item값을 넣는다.   
+			insertNode(ll,i,item);
+			return i;						// 해당 인덱스를 반환   
+		}
+		else {
+			node = node->next;				// 위에 조건에 해당하지 않는다면 다음노드를 가르키도록 한다. 
+		}
+	}
+	insertNode(ll,ll->size,item);		// item 값이 list에 들어있는 값들보다 더 클 경우   
+	return ll->size-1;					// 가장 마지막 인덱스 반환     
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

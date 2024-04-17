@@ -114,14 +114,28 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void createQueueFromLinkedList(LinkedList *ll, Queue *q)
+void createQueueFromLinkedList(LinkedList *ll, Queue *q)		// 연결리스트 큐로 구현하기  
 {
-	/* add your code here */
+	ListNode *node = ll->head;		// node는 ll의 첫번째 노드를 가르킨다.  
+	if (isEmptyQueue(q)){			// q에 값이 쌓이지 않도록 q가 비어있을 경우에만 q에 값을 넣어준다.  
+		for(int i =0; i<ll->size;i++){		
+		enqueue(q,node->item);		// q에 node의 data를 넣어준 후 node가 가르키는 값을 해당노드의 다음노드로 옮긴다.  
+		node=node->next;
+	}
+	}
+	
 }
 
-void removeOddValues(Queue *q)
+void removeOddValues(Queue *q)		// queue에서 짝수만 남기기
 {
-	/* add your code here */
+	int removed =0;		// queue에서 삭제한 값을 담을 때 사용  
+	int count = q->ll.size;		// LinkedList의 길이= count
+	for(int i =0; i<count;i++){
+		removed = dequeue(q);		
+		if(removed%2 ==0){
+			enqueue(q,removed);			// LinkedList에서 뺀 값이 짝수일 경우 다시 연결리시트의 끝에 넣어준다.   
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

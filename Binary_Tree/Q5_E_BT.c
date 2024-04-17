@@ -103,9 +103,29 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void mirrorTree(BTNode *node)
+void mirrorTree(BTNode *node)       // 이진트리 좌우 위치 바꾸기 
 {
-	/* add your code here */
+    Stack ss = {NULL};      // 빈 스택ss 생성    
+    BTNode *removed;
+    BTNode *save;
+    push(&ss,node);
+    int count = 0;
+    while(1){
+        if(ss.top==NULL){
+            break;
+        }
+        removed = pop(&ss); 
+        save = removed->left;
+        removed->left = removed->right;     // left 노드와 right노드 바꾸기  
+        removed->right = save;
+        if(removed->left != NULL){
+            push(&ss,removed->left);
+        }
+        if(removed->right != NULL){
+            push(&ss,removed->right);
+        }
+    }
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
